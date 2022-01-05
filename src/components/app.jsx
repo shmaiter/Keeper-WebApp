@@ -28,6 +28,8 @@ const App = () => {
           <Note
             key={index}
             id={index}
+            date={noteItem.date}
+            language={noteItem.language}
             title={noteItem.title}
             content={noteItem.content}
             onDelete={deleteNote}

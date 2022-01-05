@@ -7,6 +7,8 @@ function CreateArea(props) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const [note, setNote] = useState({
+    date: "",
+    language: "",
     title: "",
     content: "",
   });
@@ -23,8 +25,12 @@ function CreateArea(props) {
   }
 
   function submitNote(event) {
+    // onAdd is a fuction passed via props
+    // it takes a note object as parameter
     props.onAdd(note);
     setNote({
+      date: "",
+      language: "",
       title: "",
       content: "",
     });
@@ -38,6 +44,24 @@ function CreateArea(props) {
   return (
     <div>
       <form className="create-note">
+        {isExpanded && (
+          <input
+            name="date"
+            onChange={handleChange}
+            value={note.date}
+            placeholder="Date"
+          />
+        )}
+
+        {isExpanded && (
+          <input
+            name="language"
+            onChange={handleChange}
+            value={note.language}
+            placeholder="Language"
+          />
+        )}
+
         {isExpanded && (
           <input
             name="title"
@@ -55,6 +79,7 @@ function CreateArea(props) {
           placeholder="Take a note..."
           rows={isExpanded ? 3 : 1}
         />
+
         <Zoom in={isExpanded} style={{ transitionDelay: "400ms" }}>
           <Fab onClick={submitNote}>
             <AddIcon />

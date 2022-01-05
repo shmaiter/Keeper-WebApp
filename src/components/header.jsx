@@ -6,7 +6,7 @@ const Header = () => {
     <header>
       <h1>
         <HighlightIcon />
-        Keeper
+        Snips-Wall
       </h1>
     </header>
   );

@@ -1,21 +1,35 @@
 import React from "react";
-import DeleteIcon from "@mui/icons-material/Delete";
-import { Delete } from "@mui/icons-material";
 import HighlightOffOutlinedIcon from "@mui/icons-material/HighlightOffOutlined";
+import Card from "react-bootstrap/Card";
 
-const Note = ({ id, title, content, onDelete }) => {
+/* <div className="note">
+      <h1>{title}</h1>
+      <p>{content}</p>
+
+      <button onClick={handleClick}>
+        <HighlightOffOutlinedIcon />
+      </button>
+    </div> */
+
+const Note = ({ id, date, language, title, content, onDelete }) => {
   function handleClick() {
     onDelete(id);
   }
 
   return (
-    <div className="note">
-      <h1>{title}</h1>
-      <p>{content}</p>
-      <button onClick={handleClick}>
-        <HighlightOffOutlinedIcon />
-      </button>
-    </div>
+    <Card className="note">
+      <Card.Header>{language}</Card.Header>
+      <Card.Body>
+        <h1>{title}</h1>
+        <p>{content}</p>
+      </Card.Body>
+      <Card.Footer className="">
+        <small className="text-muted">{date}</small>
+        <button onClick={handleClick}>
+          <HighlightOffOutlinedIcon />
+        </button>
+      </Card.Footer>
+    </Card>
   );
 };
 
