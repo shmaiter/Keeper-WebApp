@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import Fab from "@mui/material/Fab";
 import Zoom from "@mui/material/Zoom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function CreateArea(props) {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -27,13 +29,27 @@ function CreateArea(props) {
   function submitNote(event) {
     // onAdd is a fuction passed via props
     // it takes a note object as parameter
-    props.onAdd(note);
-    setNote({
-      date: "",
-      language: "",
-      title: "",
-      content: "",
-    });
+    if (
+      note.date === "" ||
+      note.language === "" ||
+      note.title === "" ||
+      note.content === ""
+    ) {
+      console.log("getting here");
+      toast.warn("Don't leave empty spaces", {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 2000,
+      });
+    } else {
+      props.onAdd(note);
+      setNote({
+        date: "",
+        language: "",
+        title: "",
+        content: "",
+      });
+      setIsExpanded(false);
+    }
     event.preventDefault();
   }
 
@@ -43,6 +59,7 @@ function CreateArea(props) {
 
   return (
     <div>
+      <ToastContainer />
       <form className="create-note">
         {isExpanded && (
           <input
